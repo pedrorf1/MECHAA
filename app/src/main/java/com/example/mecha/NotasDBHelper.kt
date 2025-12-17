@@ -26,21 +26,35 @@ class NotasDBHelper(context: Context) :
         val values = ContentValues()
         values.put("titulo", titulo)
         values.put("descripcion", descripcion)
-        val result = db.insert("notas", null, values)
-        return result != -1L
+        return db.insert("notas", null, values) != -1L
     }
 
     fun updateNota(titulo: String, descripcion: String): Boolean {
         val db = writableDatabase
         val values = ContentValues()
         values.put("descripcion", descripcion)
-        val result = db.update("notas", values, "titulo=?", arrayOf(titulo))
-        return result > 0
+        return db.update("notas", values, "titulo=?", arrayOf(titulo)) > 0
     }
 
     fun deleteNota(titulo: String): Boolean {
         val db = writableDatabase
-        val result = db.delete("notas", "titulo=?", arrayOf(titulo))
-        return result > 0
+        return db.delete("notas", "titulo=?", arrayOf(titulo)) > 0
+    }
+
+    fun getAllNotas(): List<Nota> {
+        val lista = mutableListOf<Nota>()
+        val db = readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM notas", null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val titulo = cursor.getString(0)
+                val descripcion = cursor.getString(1)
+                lista.add(Nota(titulo, descripcion))
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+        return lista
     }
 }
