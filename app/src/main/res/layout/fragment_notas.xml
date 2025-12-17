@@ -7,13 +7,14 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/txtTituloPantalla"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Notas"
         android:textSize="28sp"
-        android:textColor="@color/mecha_gray_dark"
         android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content"/>
+        android:textColor="@color/mecha_gray_dark"
+        android:gravity="center"/>
 
     <EditText
         android:id="@+id/edtTitulo"
@@ -28,65 +29,65 @@
 
     <EditText
         android:id="@+id/edtDescripcion"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="10dp"
         android:hint="Descripción"
         android:textColor="@color/mecha_gray_dark"
         android:textColorHint="@color/gris_claro"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
         android:gravity="top"
-        android:layout_marginTop="10dp"
         android:background="@android:drawable/edit_text"/>
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnGuardar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Guardar"
             android:backgroundTint="@color/mecha_primary"
-            android:textColor="@color/mecha_white"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:textColor="@color/mecha_white"/>
 
         <Button
             android:id="@+id/btnEditar"
-            android:text="Editar"
-            android:backgroundTint="@color/mecha_primary"
-            android:textColor="@color/mecha_white"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:text="Editar"
+            android:backgroundTint="@color/mecha_primary"
+            android:textColor="@color/mecha_white"/>
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnBorrar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Borrar"
             android:backgroundTint="@color/mecha_primary_dark"
-            android:textColor="@color/mecha_white"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:textColor="@color/mecha_white"/>
 
         <Button
             android:id="@+id/btnVer"
-            android:text="Ver"
-            android:backgroundTint="@color/mecha_accent"
-            android:textColor="@color/mecha_gray_dark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginStart="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:text="Ver"
+            android:backgroundTint="@color/mecha_accent"
+            android:textColor="@color/mecha_gray_dark"/>
     </LinearLayout>
 
 </LinearLayout>
