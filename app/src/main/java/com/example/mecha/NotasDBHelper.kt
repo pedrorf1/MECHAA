@@ -6,17 +6,13 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class NotasDBHelper(context: Context) :
-    SQLiteOpenHelper(context, "notas.db", null, 1) {
+    SQLiteOpenHelper(context, "NotasDB", null, 1) {
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(
-            """
-            CREATE TABLE notas(
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                titulo TEXT NOT NULL,
-                contenido TEXT NOT NULL
-            )
-            """.trimIndent()
+            "CREATE TABLE notas (" +
+                    "titulo TEXT PRIMARY KEY," +
+                    "descripcion TEXT)"
         )
     }
 
@@ -25,30 +21,26 @@ class NotasDBHelper(context: Context) :
         onCreate(db)
     }
 
-    fun insertarNota(titulo: String, contenido: String): Long {
+    fun insertNota(titulo: String, descripcion: String): Boolean {
         val db = writableDatabase
-        val valores = ContentValues().apply {
-            put("titulo", titulo)
-            put("contenido", contenido)
-        }
-        return db.insert("notas", null, valores)
+        val values = ContentValues()
+        values.put("titulo", titulo)
+        values.put("descripcion", descripcion)
+        val result = db.insert("notas", null, values)
+        return result != -1L
     }
 
-    fun obtenerUltimaNota(): String {
-        val db = readableDatabase
-        val cursor = db.rawQuery(
-            "SELECT titulo, contenido FROM notas ORDER BY id DESC LIMIT 1",
-            null
-        )
+    fun updateNota(titulo: String, descripcion: String): Boolean {
+        val db = writableDatabase
+        val values = ContentValues()
+        values.put("descripcion", descripcion)
+        val result = db.update("notas", values, "titulo=?", arrayOf(titulo))
+        return result > 0
+    }
 
-        return if (cursor.moveToFirst()) {
-            val titulo = cursor.getString(0)
-            val contenido = cursor.getString(1)
-            cursor.close()
-            "Título: $titulo\nContenido: $contenido"
-        } else {
-            cursor.close()
-            "No hay notas guardadas"
-        }
+    fun deleteNota(titulo: String): Boolean {
+        val db = writableDatabase
+        val result = db.delete("notas", "titulo=?", arrayOf(titulo))
+        return result > 0
     }
 }
